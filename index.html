@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mehmet Yüksel</title>
+<meta name="description" content="Mehmet Yüksel — Yönetim Bilişim Sistemleri öğrencisi; veri bilimi ve yapay zekaya ilgi duyan, gerçek projeler üreten bir geliştirici.">
+<meta property="og:title" content="Mehmet Yüksel">
+<meta property="og:description" content="Veri bilimine ilgi duyan bir YBS öğrencisinin portföyü: projeler, beceriler, iletişim.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#05070f">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305070f'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%238fbbe0'/%3E%3C/svg%3E">
+<style>
+  :root{
+    color-scheme: dark;
+    --bg:#05070f; --bg-elevated:#0d1526;
+    --surface:rgba(255,255,255,.055); --surface-strong:rgba(255,255,255,.1);
+    --border:rgba(168,199,255,.16); --border-strong:rgba(0,217,255,.5);
+    --text:#f1f5ff; --text-muted:#9fb0d6;
+    --accent:#2f8fff; --accent-bright:#00d9ff;
+    --glow:rgba(0,180,255,.55); --glow-soft:rgba(0,180,255,.16);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  em, i, cite, address{font-style:normal;}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-synthesis:none;
+    font-size:16px; line-height:1.65;
+    padding-inline:20px; position:relative; overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Syne', ui-sans-serif, system-ui, sans-serif;
+    font-weight:700; letter-spacing:-0.02em; text-wrap:balance; margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;}
+  a{color:inherit;}
+  img{max-width:100%;}
+  .wrap{max-width:900px; margin-inline:auto;}
+  ::selection{background:var(--glow-soft); color:var(--text);}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent-bright); outline-offset:3px; border-radius:4px;
+  }
+
+  .grain{
+    position:fixed; inset:0; z-index:-3; opacity:.05; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.9) 1px, transparent 1px);
+    background-size:26px 26px;
+  }
+  .aurora{position:fixed; inset:0; z-index:-2; overflow:hidden; pointer-events:none;}
+  .aurora span{
+    position:absolute; border-radius:50%; filter:blur(70px);
+    background:radial-gradient(circle, var(--glow) 0%, transparent 70%);
+    opacity:.5; will-change:transform;
+  }
+  .aurora span:nth-child(1){width:620px; height:620px; top:-220px; left:-160px; animation:drift1 22s ease-in-out infinite alternate;}
+  .aurora span:nth-child(2){width:520px; height:520px; top:30%; right:-200px; animation:drift2 26s ease-in-out infinite alternate;}
+  .aurora span:nth-child(3){width:560px; height:560px; bottom:-260px; left:20%; animation:drift3 30s ease-in-out infinite alternate; opacity:.36;}
+  @keyframes drift1{ from{transform:translate(0,0) scale(1);} to{transform:translate(60px,80px) scale(1.15);} }
+  @keyframes drift2{ from{transform:translate(0,0) scale(1);} to{transform:translate(-70px,50px) scale(0.9);} }
+  @keyframes drift3{ from{transform:translate(0,0) scale(1);} to{transform:translate(40px,-60px) scale(1.1);} }
+  .spotlight{
+    position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:0;
+    background:radial-gradient(280px 280px at var(--sx,50%) var(--sy,50%), var(--glow-soft), transparent 70%);
+    transition:opacity .4s ease;
+  }
+  .spotlight.is-active{opacity:1;}
+  @media (prefers-reduced-motion: reduce){
+    .aurora span{animation:none !important;}
+    .spotlight{display:none !important;}
+  }
+
+  [data-reveal]{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  [data-reveal].is-visible{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{opacity:1 !important; transform:none !important; transition:none !important;}
+  }
+
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(5,7,15,.62);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+    padding-block:14px;
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; gap:16px; position:relative;}
+  .brand{
+    font-family:'IBM Plex Mono', monospace; font-size:14px; font-weight:500;
+    letter-spacing:.02em; text-decoration:none; white-space:nowrap;
+  }
+  .brand b{color:var(--accent-bright); text-shadow:0 0 18px var(--glow);}
+  .nav-links{display:flex; align-items:center; gap:22px; flex-wrap:wrap;}
+  .nav-links a{
+    font-size:13px; text-decoration:none; color:var(--text-muted);
+    font-family:'IBM Plex Mono', monospace; letter-spacing:.03em;
+    text-transform:uppercase; transition:color .15s ease; position:relative; padding-bottom:2px;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--accent-bright);}
+  .nav-links a.is-active{color:var(--accent-bright); border-bottom:1px solid var(--accent-bright);}
+  .nav-right{display:flex; align-items:center; gap:10px;}
+  .lang-toggle{
+    display:flex; border:1px solid var(--border); border-radius:999px; overflow:hidden;
+    background:var(--surface); font-family:'IBM Plex Mono', monospace; font-size:12px;
+  }
+  .lang-toggle button{
+    border:none; background:transparent; color:var(--text-muted); padding:6px 11px; cursor:pointer;
+    letter-spacing:.04em; transition:.15s ease;
+  }
+  .lang-toggle button.is-active{background:var(--accent); color:#040a16; font-weight:600;}
+  .lang-toggle button:not(.is-active):hover{color:var(--accent-bright);}
+  .hamburger{
+    display:none; width:36px; height:36px; border-radius:8px; border:1px solid var(--border);
+    background:var(--surface); cursor:pointer; align-items:center; justify-content:center;
+    flex-direction:column; gap:4px;
+  }
+  .hamburger span{width:16px; height:2px; background:var(--text); display:block; transition:.2s ease;}
+  .hamburger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .hamburger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .hamburger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+  .hero{position:relative; padding-block:96px 80px;}
+  #pipeline{position:fixed; inset:0; width:100vw; height:100vh; z-index:-2; opacity:.55; pointer-events:none;}
+  .hero-inner{position:relative; z-index:1;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--accent-bright); display:inline-flex; align-items:center; gap:8px;
+    margin-bottom:24px;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent-bright); box-shadow:0 0 12px 3px var(--glow); display:inline-block;}
+  .hero h1{
+    font-size:clamp(2.2rem, 6vw, 3.8rem); line-height:1.15; letter-spacing:-0.03em; font-weight:800;
+    text-shadow:0 0 50px var(--glow-soft);
+  }
+  .hero p.lede{
+    max-width:58ch; color:var(--text-muted); margin-top:24px; font-size:1.05rem;
+  }
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:34px;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px; letter-spacing:.02em;
+    padding:12px 20px; border-radius:9px; text-decoration:none; display:inline-flex;
+    align-items:center; gap:8px; transition:.18s ease; border:1px solid transparent;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg, var(--accent), var(--accent-bright)); color:#040a16;
+    box-shadow:0 0 0 1px rgba(255,255,255,.12) inset, 0 10px 30px -8px var(--glow);
+  }
+  .btn-primary:hover, .btn-primary:focus-visible{box-shadow:0 0 0 1px rgba(255,255,255,.18) inset, 0 14px 40px -6px var(--glow);}
+  .btn-ghost{border-color:var(--border); color:var(--text); background:var(--surface);}
+  .btn-ghost:hover, .btn-ghost:focus-visible{border-color:var(--border-strong); color:var(--accent-bright); box-shadow:0 0 22px var(--glow-soft);}
+
+  section{padding-block:72px; border-top:1px solid var(--border);}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:36px; flex-wrap:wrap;}
+  .section-num{font-family:'IBM Plex Mono', monospace; color:var(--accent-bright); font-size:13px;}
+  .section-head h2{font-size:clamp(1.6rem, 3vw, 2.1rem);}
+
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:start;}
+  .about-grid p{color:var(--text-muted); max-width:56ch;}
+  .about-grid p + p{margin-top:16px;}
+  dl.facts{
+    display:grid; grid-template-columns:auto 1fr; gap:10px 16px; margin:0; padding:22px;
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    backdrop-filter:blur(8px);
+  }
+  dl.facts dt{font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--text-muted); align-self:start; padding-top:2px;}
+  dl.facts dd{margin:0; font-size:14.5px;}
+
+  .skill-group{margin-bottom:28px;}
+  .skill-group:last-child{margin-bottom:0;}
+  .skill-label{font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); margin-bottom:12px; display:block;}
+  .chips{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; padding:7px 13px;
+    border:1px solid var(--border); border-radius:999px; background:var(--surface); white-space:nowrap;
+  }
+  .chip.interest{border-color:var(--border-strong); color:var(--accent-bright); background:var(--glow-soft);}
+
+  .projects-list{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:18px; align-items:start;}
+  .project{
+    display:flex; flex-direction:column; gap:10px;
+    padding:22px; background:var(--surface); border:1px solid var(--border); border-radius:16px;
+    backdrop-filter:blur(8px); position:relative; overflow:hidden;
+    transition:border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+    transform-style:preserve-3d;
+  }
+  .project::after{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
+    background:radial-gradient(220px 220px at var(--mx,50%) var(--my,50%), var(--glow-soft), transparent 60%);
+    transition:opacity .25s ease;
+  }
+  .project:hover::after{opacity:1;}
+  .project:hover{border-color:var(--border-strong); box-shadow:0 16px 46px -16px var(--glow);}
+  .project-top{display:flex; align-items:flex-start; justify-content:space-between; gap:12px;}
+  .project-num{font-family:'IBM Plex Mono', monospace; color:var(--accent-bright); font-size:12px; padding-top:4px;}
+  .project-visual{
+    width:48px; height:48px; flex:none; border-radius:12px; position:relative; overflow:hidden;
+    border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+    color:var(--accent-bright); background:var(--bg-elevated);
+  }
+  .project-visual svg{width:21px; height:21px; opacity:.85;}
+  .project-visual[data-pattern="security"]{
+    background:
+      repeating-linear-gradient(115deg, var(--glow-soft) 0 2px, transparent 2px 14px),
+      radial-gradient(120% 140% at 20% 0%, var(--surface-strong), var(--bg-elevated));
+  }
+  .project-visual[data-pattern="health"]{
+    background:
+      radial-gradient(60% 80% at 25% 20%, var(--glow-soft), transparent 60%),
+      radial-gradient(60% 80% at 80% 80%, var(--glow-soft), transparent 60%),
+      var(--bg-elevated);
+  }
+  .project-visual[data-pattern="data"]{
+    background:
+      repeating-linear-gradient(0deg, var(--glow-soft) 0 1px, transparent 1px 10px),
+      repeating-linear-gradient(90deg, var(--glow-soft) 0 1px, transparent 1px 10px),
+      var(--bg-elevated);
+  }
+  .project-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+  .project h3{font-size:1.15rem; letter-spacing:-0.01em;}
+  .project-cat{font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-bright); background:var(--glow-soft); padding:4px 10px; border-radius:999px; white-space:nowrap;}
+  .project p.desc{color:var(--text-muted); margin:0; font-size:14.5px;}
+  .project .chips{margin-top:2px;}
+  .project .chip{font-size:12px; padding:5px 11px; background:var(--surface-strong);}
+  .project-links{display:flex; gap:18px; flex-wrap:wrap; margin-top:2px;}
+  .project-link{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; text-decoration:none; color:var(--text);
+    border-bottom:1px solid var(--border); padding-bottom:2px; transition:.15s ease;
+  }
+  .project-link:hover, .project-link:focus-visible{color:var(--accent-bright); border-color:var(--accent-bright);}
+  .project-link svg{transition:transform .15s ease;}
+  .project-link:hover svg{transform:translate(2px,-2px);}
+
+  .contact-box{
+    background:var(--surface); border:1px solid var(--border); border-radius:18px;
+    padding:48px 40px; text-align:center; box-shadow:0 24px 70px -26px var(--glow);
+    backdrop-filter:blur(8px);
+  }
+  .contact-box h2{font-size:clamp(1.7rem, 3.4vw, 2.3rem); margin-bottom:14px;}
+  .contact-box p{color:var(--text-muted); max-width:48ch; margin:0 auto 28px;}
+  .contact-actions{display:flex; justify-content:center; gap:12px; flex-wrap:wrap;}
+
+  footer{padding-block:32px; display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap;}
+  footer .mono{font-size:12px; color:var(--text-muted);}
+
+  @media (max-width:720px){
+    .about-grid{grid-template-columns:1fr;}
+    .projects-list{grid-template-columns:1fr;}
+    .project{padding:20px;}
+    .contact-box{padding:36px 22px;}
+    .hamburger{display:inline-flex;}
+    .nav-links{
+      display:none; position:absolute; top:calc(100% + 1px); left:0; right:0;
+      flex-direction:column; align-items:flex-start; gap:4px; padding:14px 4px;
+      background:var(--bg-elevated); border:1px solid var(--border); border-top:none;
+      border-radius:0 0 12px 12px;
+    }
+    .nav-links.is-open{display:flex;}
+    .nav-links a{padding:10px 16px; width:100%;}
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+<canvas id="pipeline" aria-hidden="true"></canvas>
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
+<nav class="nav" id="siteNav">
+  <div class="wrap nav-row">
+    <a href="#top" class="brand"><b>MY</b> / mehmet yüksel</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about" data-tr="Hakkımda" data-en="About">Hakkımda</a>
+      <a href="#skills" data-tr="Beceriler" data-en="Skills">Beceriler</a>
+      <a href="#projects" data-tr="Projeler" data-en="Projects">Projeler</a>
+      <a href="#contact" data-tr="İletişim" data-en="Contact">İletişim</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" id="langTr">TR</button>
+        <button type="button" id="langEn">EN</button>
+      </div>
+      <button class="hamburger" id="hamburger" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero" style="border-top:none;">
+    <div class="wrap hero-inner">
+      <span class="eyebrow" data-tr="Kafkas Üniversitesi · Yönetim Bilişim Sistemleri" data-en="Kafkas University · Management Information Systems">Kafkas Üniversitesi · Yönetim Bilişim Sistemleri</span>
+      <h1>Mehmet Yüksel</h1>
+      <p class="lede" data-tr="Yönetim Bilişim Sistemleri öğrencisiyim. İlgi alanım veri bilimi ve yapay zeka; öğrendiklerimi küçük ama gerçek projelere dönüştürüyorum." data-en="Management Information Systems student. My focus is data science and AI — I turn what I learn into small, real projects.">Yönetim Bilişim Sistemleri öğrencisiyim. İlgi alanım veri bilimi ve yapay zeka; öğrendiklerimi küçük ama gerçek projelere dönüştürüyorum.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects" data-tr="Projelerimi gör" data-en="See my projects">Projelerimi gör</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="section-num">01</span>
+        <h2 data-tr="Hakkımda" data-en="About">Hakkımda</h2>
+      </div>
+      <div class="about-grid">
+        <div data-reveal>
+          <p data-tr="Yönetim Bilişim Sistemleri eğitimi bana hem iş süreçlerini hem de yazılımı aynı anda okumayı öğretti — bu yüzden veri bilimine 'sadece kod' olarak değil, verinin bir karara nasıl dönüştüğü sorusu olarak bakıyorum." data-en="Studying Management Information Systems taught me to read business processes and software at the same time — so I don't approach data science as 'just code', but as the question of how data actually turns into a decision.">Yönetim Bilişim Sistemleri eğitimi bana hem iş süreçlerini hem de yazılımı aynı anda okumayı öğretti — bu yüzden veri bilimine "sadece kod" olarak değil, verinin bir karara nasıl dönüştüğü sorusu olarak bakıyorum.</p>
+          <p data-tr="Veri bilimine olan ilgim beni Python, yabancı diller ve yapay zekaya yönlendirdi; öğrendiğimi küçük ama gerçek projelerle sınıyorum. Aşağıdaki projelerin hepsi bu merakın ürünü." data-en="My interest in data science led me to Python, foreign languages and artificial intelligence; I test what I learn through small but real projects. Everything below is a product of that curiosity.">Veri bilimine olan ilgim beni Python, yabancı diller ve yapay zekaya yönlendirdi; öğrendiğimi küçük ama gerçek projelerle sınıyorum. Aşağıdaki projelerin hepsi bu merakın ürünü.</p>
+        </div>
+        <dl class="facts" data-reveal>
+          <dt data-tr="Üniversite" data-en="University">Üniversite</dt>
+          <dd>Kafkas Üniversitesi — YBS</dd>
+          <dt data-tr="Alan" data-en="Field">Alan</dt>
+          <dd data-tr="Veri Bilimi" data-en="Data Science">Veri Bilimi</dd>
+          <dt data-tr="İlgi alanım" data-en="Interests">İlgi alanım</dt>
+          <dd data-tr="Yapay zeka, Python, Yabancı diller" data-en="Artificial intelligence, Python, Foreign languages">Yapay zeka, Python, Yabancı diller</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="section-num">02</span>
+        <h2 data-tr="Beceriler" data-en="Skills">Beceriler</h2>
+      </div>
+
+      <div class="skill-group" data-reveal>
+        <span class="skill-label" data-tr="Dil ve teknolojiler" data-en="Languages & technologies">Dil ve teknolojiler</span>
+        <div class="chips">
+          <span class="chip">TypeScript</span>
+          <span class="chip">Dart</span>
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-reveal>
+        <span class="skill-label" data-tr="Veri ve analiz" data-en="Data & analytics">Veri ve analiz</span>
+        <div class="chips">
+          <span class="chip">pandas</span>
+          <span class="chip">numpy</span>
+          <span class="chip">Streamlit</span>
+          <span class="chip">pytest</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-reveal>
+        <span class="skill-label" data-tr="Araçlar" data-en="Tools">Araçlar</span>
+        <div class="chips">
+          <span class="chip">Next.js</span>
+          <span class="chip">NestJS</span>
+          <span class="chip">Flutter</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Git & GitHub</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-reveal>
+        <span class="skill-label" data-tr="Şu an öğreniyorum" data-en="Currently learning">Şu an öğreniyorum</span>
+        <div class="chips">
+          <span class="chip interest" data-tr="Veri bilimi temelleri" data-en="Data science fundamentals">Veri bilimi temelleri</span>
+          <span class="chip interest" data-tr="Yapay zeka / makine öğrenmesi" data-en="AI / machine learning">Yapay zeka / makine öğrenmesi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="section-num">03</span>
+        <h2 data-tr="Projeler" data-en="Projects">Projeler</h2>
+      </div>
+      <div class="projects-list" id="projectsList"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-box" data-reveal>
+        <span class="eyebrow" style="margin-bottom:16px;" data-tr="İletişim" data-en="Contact">İletişim</span>
+        <h2 data-tr="İletişime Geç" data-en="Get in Touch">İletişime Geç</h2>
+        <p data-tr="Öğrenmeye devam ediyorum; farklı fikir ve görüşlere, ortak çalışmalara ve yeni fırsatlara açığım. Gelin birlikte bir şeyler inşa edelim, üretelim. En hızlı yol LinkedIn, GitHub ya da e-posta." data-en="I'm still learning, and I'm open to different ideas and perspectives, collaborative work and new opportunities. Let's build and create something together. The fastest way to reach me is LinkedIn, GitHub or email.">Öğrenmeye devam ediyorum; farklı fikir ve görüşlere, ortak çalışmalara ve yeni fırsatlara açığım. Gelin birlikte bir şeyler inşa edelim, üretelim. En hızlı yol LinkedIn, GitHub ya da e-posta.</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/mehmet-y%C3%BCksel-32831834a" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/mehmet-yuksell" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="mailto:mehmetyuksell@gmail.com" data-tr="E-posta ✉" data-en="Email ✉">E-posta ✉</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <span class="mono">© 2026 Mehmet Yüksel</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pointerFine = window.matchMedia('(pointer: fine)').matches;
+
+  var currentLang = 'tr';
+  try{ var saved = localStorage.getItem('my-lang'); if(saved === 'en') currentLang = 'en'; }catch(e){}
+
+  function applyLang(l){
+    document.querySelectorAll('[data-tr]').forEach(function(el){
+      var val = el.getAttribute(l === 'en' ? 'data-en' : 'data-tr');
+      if(val !== null) el.textContent = val;
+    });
+    document.documentElement.setAttribute('lang', l === 'en' ? 'en' : 'tr');
+    document.getElementById('langTr').classList.toggle('is-active', l === 'tr');
+    document.getElementById('langEn').classList.toggle('is-active', l === 'en');
+  }
+  function setLang(l){
+    currentLang = l;
+    applyLang(l);
+    try{ localStorage.setItem('my-lang', l); }catch(e){}
+  }
+  document.getElementById('langTr').addEventListener('click', function(){ setLang('tr'); });
+  document.getElementById('langEn').addEventListener('click', function(){ setLang('en'); });
+
+  var PROJECTS = [
+    {
+      title: "SentinelScope",
+      category: {tr:"Güvenlik", en:"Security"},
+      pattern: "security",
+      icon: 'shield',
+      desc: {
+        tr:"Bir web sitesinin veya IP adresinin güvenlik durumunu DNS, TLS, HTTP başlıkları, IP/alan adı ve tehdit istihbaratı verilerini toplayarak tek bir risk skoruna çeviren platform. Veri eksikse 'güvenli' varsaymak yerine açıkça 'bilinmiyor' diyor; SSRF korumalı gerçek ağ sorguları üzerine kurulu.",
+        en:"A platform that turns a website or IP's security posture into a single risk score by gathering DNS, TLS, HTTP header, IP/domain and threat-intel data. When data is missing it says 'unavailable' instead of assuming 'safe' — built on real, SSRF-protected network lookups."
+      },
+      stack: ["Next.js 16","TypeScript","Tailwind","Node.js","Docker"],
+      links: [
+        {label:{tr:"Canlı demo", en:"Live demo"}, href:"https://sentinelscope-nu.vercel.app/"},
+        {label:{tr:"Koda bak", en:"View code"}, href:"https://github.com/mehmet-yuksell/sentinelscope-security"}
+      ]
+    },
+    {
+      title: "Bist30",
+      titleEn: "BIST30 Technical Analysis",
+      category: {tr:"Veri Bilimi", en:"Data Science"},
+      pattern: "data",
+      icon: 'chart',
+      desc: {
+        tr:"Borsa İstanbul hisseleri için Streamlit ile yazılmış teknik analiz paneli. SMA, EMA, RSI ve MACD'i sıfırdan (pandas/numpy ile) hesaplıyor; ~790 hissede arama, TL/USD kur dönüşümü ve ileriye bakış hatası içermeyen bir 'Sinyal Karnesi' backtest motoru barındırıyor.",
+        en:"A Streamlit technical-analysis dashboard for Turkey's BIST stocks. SMA, EMA, RSI and MACD are computed from scratch with pandas/numpy; it searches across ~790 listed companies, converts prices between TRY/USD, and ships a look-ahead-free 'Signal Scorecard' backtest engine."
+      },
+      stack: ["Python","Streamlit","pandas","numpy","pytest"],
+      links: [
+        {label:{tr:"Canlı demo", en:"Live demo"}, href:"https://bist30-opsputfhf9b9i6kkjnyefc.streamlit.app/"},
+        {label:{tr:"Koda bak", en:"View code"}, href:"https://github.com/mehmet-yuksell/Bist30"}
+      ]
+    },
+    {
+      title: "Mombykind — Aşı Ajandası",
+      titleEn: "Mombykind — Vaccine Agenda",
+      category: {tr:"Sağlık Teknolojisi", en:"Health Tech"},
+      pattern: "health",
+      icon: 'pulse',
+      desc: {
+        tr:"Ebeveynlerin çocuk aşı takvimini takip edebildiği, LOINC/SNOMED-CT standartlarıyla uyumlu, rol tabanlı yetkilendirmeye sahip bağımsız bir modül. NestJS + PostgreSQL backend'i, Flutter uygulamasıyla yerel bildirimler üzerinden konuşuyor.",
+        en:"A standalone module for parents to track their child's vaccination schedule, compliant with LOINC/SNOMED-CT standards and with role-based authorization. A NestJS + PostgreSQL backend talks to a Flutter app through local notifications."
+      },
+      stack: ["NestJS","PostgreSQL","Flutter","Docker","Swagger"],
+      links: [
+        {label:{tr:"Koda bak", en:"View code"}, href:"https://github.com/mehmet-yuksell/mombykind-vaccine-tracker"}
+      ]
+    },
+    {
+      title: "Doğum Çantası",
+      titleEn: "Hospital Bag Tracker",
+      category: {tr:"Sağlık Teknolojisi", en:"Health Tech"},
+      pattern: "health",
+      icon: 'pulse',
+      desc: {
+        tr:"Gebeliğin son haftalarında hastane çantasını hazırlamak için sunucusuz, tamamen cihaz üzerinde çalışan bir Flutter modülü. Hazır madde listesi, gebelik haftasına göre yerel bildirim hatırlatıcısı ve eksik maddeleri paylaşma özelliği içeriyor.",
+        en:"A serverless, fully on-device Flutter module for packing the hospital bag in the final weeks of pregnancy. It ships a default item checklist, local notification reminders tied to pregnancy week, and a way to share what's still missing."
+      },
+      stack: ["Flutter","Dart","SQLite",{tr:"Yerel Bildirimler", en:"Local Notifications"}],
+      links: [
+        {label:{tr:"Koda bak", en:"View code"}, href:"https://github.com/mehmet-yuksell/dogum-cantasi"}
+      ]
+    }
+  ];
+
+  var ICONS = {
+    shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v5c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>',
+    pulse:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2-5 3 10 2-6h7"/></svg>',
+    chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg>'
+  };
+
+  var svgExtIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function chipHTML(c){
+    if (typeof c === 'string') return '<span class="chip">' + esc(c) + '</span>';
+    return '<span class="chip" data-tr="'+esc(c.tr)+'" data-en="'+esc(c.en)+'">'+esc(c.tr)+'</span>';
+  }
+
+  function renderProjects(){
+    var list = document.getElementById('projectsList');
+    list.innerHTML = PROJECTS.map(function(p, i){
+      var num = String(i+1).padStart(2,'0');
+      var titleAttrs = p.titleEn ? ' data-tr="'+esc(p.title)+'" data-en="'+esc(p.titleEn)+'"' : '';
+      var linksHTML = p.links.map(function(l){
+        return '<a class="project-link" href="'+esc(l.href)+'" target="_blank" rel="noopener">'+
+          '<span data-tr="'+esc(l.label.tr)+'" data-en="'+esc(l.label.en)+'">'+esc(l.label.tr)+'</span>'+svgExtIcon+'</a>';
+      }).join('');
+      return (
+        '<div class="project" data-reveal>' +
+          '<div class="project-top">' +
+            '<div class="project-visual" data-pattern="'+p.pattern+'">'+ICONS[p.icon]+'</div>' +
+            '<span class="project-num">'+num+'</span>' +
+          '</div>' +
+          '<div class="project-head">' +
+            '<h3'+titleAttrs+'>'+esc(p.title)+'</h3>' +
+            '<span class="project-cat" data-tr="'+esc(p.category.tr)+'" data-en="'+esc(p.category.en)+'">'+esc(p.category.tr)+'</span>' +
+          '</div>' +
+          '<p class="desc" data-tr="'+esc(p.desc.tr)+'" data-en="'+esc(p.desc.en)+'">'+esc(p.desc.tr)+'</p>' +
+          '<div class="chips">'+p.stack.map(chipHTML).join('')+'</div>' +
+          '<div class="project-links">'+linksHTML+'</div>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  function initReveals(){
+    var targets = [];
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ targets.push(el); });
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    var counters = new WeakMap();
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          var el = entry.target;
+          var parent = el.parentElement;
+          var idx = counters.get(parent) || 0;
+          el.style.transitionDelay = Math.min(idx, 5) * 80 + 'ms';
+          counters.set(parent, idx + 1);
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+    targets.forEach(function(el){ observer.observe(el); });
+  }
+
+  function initNavActive(){
+    var sections = Array.from(document.querySelectorAll('main section[id]'));
+    var links = Array.from(document.querySelectorAll('.nav-links a'));
+    if (!('IntersectionObserver' in window)) return;
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link = map[entry.target.id];
+        if (!link) return;
+        if (entry.isIntersecting) {
+          links.forEach(function(a){ a.classList.remove('is-active'); });
+          link.classList.add('is-active');
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    sections.forEach(function(s){ observer.observe(s); });
+  }
+
+  function initMobileMenu(){
+    var btn = document.getElementById('hamburger');
+    var panel = document.getElementById('navLinks');
+    function close(){
+      panel.classList.remove('is-open');
+      btn.setAttribute('aria-expanded','false');
+    }
+    function open(){
+      panel.classList.add('is-open');
+      btn.setAttribute('aria-expanded','true');
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if (panel.classList.contains('is-open')) close(); else open();
+    });
+    panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+    document.addEventListener('click', function(e){
+      if (panel.classList.contains('is-open') && !panel.contains(e.target) && e.target !== btn) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') close();
+    });
+  }
+
+  function initSpotlight(){
+    if (reduceMotion || !pointerFine) return;
+    var el = document.getElementById('spotlight');
+    window.addEventListener('pointermove', function(e){
+      el.style.setProperty('--sx', e.clientX + 'px');
+      el.style.setProperty('--sy', e.clientY + 'px');
+      el.classList.add('is-active');
+    });
+    document.addEventListener('mouseleave', function(){ el.classList.remove('is-active'); });
+  }
+
+  function initParallax(){
+    if (reduceMotion) return;
+    var el = document.querySelector('.aurora');
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        el.style.transform = 'translateY(' + (window.scrollY * 0.04) + 'px)';
+        ticking = false;
+      });
+    }, {passive:true});
+  }
+
+  function initCardTilt(){
+    if (reduceMotion || !pointerFine) return;
+    document.querySelectorAll('.project').forEach(function(card){
+      card.addEventListener('pointermove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--mx', (px*100) + '%');
+        card.style.setProperty('--my', (py*100) + '%');
+        var rx = (py - 0.5) * -6;
+        var ry = (px - 0.5) * 6;
+        card.style.transform = 'perspective(700px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
+      });
+      card.addEventListener('pointerleave', function(){
+        card.style.transform = '';
+      });
+    });
+  }
+
+  function initCanvas(){
+    var canvas = document.getElementById('pipeline');
+    var ctx = canvas.getContext('2d');
+    var W, H, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var nodes = [];
+    var N = 52;
+    var t = 0;
+    var pointer = {x:null, y:null};
+    var running = false;
+    var rafId = null;
+
+    function colorRGB(varName){
+      var v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+      var el = document.createElement('div');
+      el.style.color = v;
+      document.body.appendChild(el);
+      var rgb = getComputedStyle(el).color;
+      document.body.removeChild(el);
+      return rgb;
+    }
+    var lineRgb = colorRGB('--border-strong');
+    var dotRgb = colorRGB('--accent-bright');
+
+    function resize(){
+      var newW = window.innerWidth * dpr, newH = window.innerHeight * dpr;
+      if (W && H && nodes.length){
+        var sx = newW / W, sy = newH / H;
+        nodes.forEach(function(n){ n.x *= sx; n.y *= sy; });
+      }
+      W = canvas.width = newW;
+      H = canvas.height = newH;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+    }
+
+    function init(){
+      nodes = [];
+      for(var i=0;i<N;i++){
+        nodes.push({
+          x: Math.random()*W, y: Math.random()*H,
+          vx: (Math.random()-0.5)*0.55*dpr, vy:(Math.random()-0.5)*0.55*dpr
+        });
+      }
+    }
+
+    window.addEventListener('pointermove', function(e){
+      pointer.x = e.clientX * dpr;
+      pointer.y = e.clientY * dpr;
+    });
+    document.addEventListener('mouseleave', function(){ pointer.x = null; pointer.y = null; });
+
+    function step(){
+      if (!running) return;
+      ctx.clearRect(0,0,W,H);
+      var maxDist = 165*dpr;
+      t += 1;
+
+      for(var i=0;i<nodes.length;i++){
+        var a = nodes[i];
+        if(!reduceMotion){
+          a.x += a.vx; a.y += a.vy;
+          if(pointer.x !== null){
+            var dxp = a.x - pointer.x, dyp = a.y - pointer.y;
+            var dp = Math.sqrt(dxp*dxp + dyp*dyp);
+            var reach = 180*dpr;
+            if(dp < reach && dp > 0.01){
+              var force = (1 - dp/reach) * 0.6;
+              a.vx += (dxp/dp) * force * 0.05;
+              a.vy += (dyp/dp) * force * 0.05;
+            }
+          }
+          var sp = Math.sqrt(a.vx*a.vx + a.vy*a.vy);
+          var maxSp = 1.1*dpr;
+          if(sp > maxSp){ a.vx = a.vx/sp*maxSp; a.vy = a.vy/sp*maxSp; }
+          if(a.x<0||a.x>W) a.vx*=-1;
+          if(a.y<0||a.y>H) a.vy*=-1;
+        }
+        for(var j=i+1;j<nodes.length;j++){
+          var b = nodes[j];
+          var dx=a.x-b.x, dy=a.y-b.y;
+          var dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist<maxDist){
+            var op = (1-dist/maxDist)*0.45;
+            ctx.strokeStyle = lineRgb.replace('rgb','rgba').replace(')', ','+op+')');
+            ctx.lineWidth = 1*dpr;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+          }
+        }
+        if(pointer.x !== null){
+          var dxp2 = a.x - pointer.x, dyp2 = a.y - pointer.y;
+          var dp2 = Math.sqrt(dxp2*dxp2 + dyp2*dyp2);
+          if(dp2 < 190*dpr){
+            var op2 = (1-dp2/(190*dpr))*0.55;
+            ctx.strokeStyle = dotRgb.replace('rgb','rgba').replace(')', ','+op2+')');
+            ctx.lineWidth = 1*dpr;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(pointer.x,pointer.y); ctx.stroke();
+          }
+        }
+      }
+      for(var k=0;k<nodes.length;k++){
+        var pulse = reduceMotion ? 1.8 : 1.6 + Math.sin(t*0.04 + k)*0.7;
+        ctx.shadowColor = dotRgb;
+        ctx.shadowBlur = (8 + pulse*2)*dpr;
+        ctx.fillStyle = dotRgb.replace('rgb','rgba').replace(')', ',0.95)');
+        ctx.beginPath(); ctx.arc(nodes[k].x, nodes[k].y, pulse*dpr, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.shadowBlur = 0;
+      if(!reduceMotion) rafId = requestAnimationFrame(step);
+      else running = false;
+    }
+
+    function start(){
+      if (running) return;
+      running = true;
+      if (!reduceMotion) rafId = requestAnimationFrame(step);
+      else step();
+    }
+    function stop(){
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    resize(); init();
+    window.addEventListener('resize', resize);
+
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden) stop(); else start();
+    });
+    start();
+  }
+
+  renderProjects();
+  applyLang(currentLang);
+  initReveals();
+  initNavActive();
+  initMobileMenu();
+  initSpotlight();
+  initParallax();
+  initCardTilt();
+  initCanvas();
+})();
+</script>
+</body>
+</html>
