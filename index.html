@@ -175,10 +175,10 @@
   }
   .chip.interest{border-color:var(--border-strong); color:var(--accent-bright); background:var(--glow-soft);}
 
-  .projects-list{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:18px; align-items:start;}
+  .projects-list{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; align-items:start;}
   .project{
-    display:flex; flex-direction:column; gap:10px;
-    padding:22px; background:var(--surface); border:1px solid var(--border); border-radius:16px;
+    display:flex; flex-direction:column; gap:8px;
+    padding:16px; background:var(--surface); border:1px solid var(--border); border-radius:14px;
     backdrop-filter:blur(8px); position:relative; overflow:hidden;
     transition:border-color .2s ease, box-shadow .2s ease, transform .15s ease;
     transform-style:preserve-3d;
@@ -193,11 +193,11 @@
   .project-top{display:flex; align-items:flex-start; justify-content:space-between; gap:12px;}
   .project-num{font-family:'IBM Plex Mono', monospace; color:var(--accent-bright); font-size:12px; padding-top:4px;}
   .project-visual{
-    width:48px; height:48px; flex:none; border-radius:12px; position:relative; overflow:hidden;
+    width:40px; height:40px; flex:none; border-radius:10px; position:relative; overflow:hidden;
     border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
     color:var(--accent-bright); background:var(--bg-elevated);
   }
-  .project-visual svg{width:21px; height:21px; opacity:.85;}
+  .project-visual svg{width:18px; height:18px; opacity:.85;}
   .project-visual[data-pattern="security"]{
     background:
       repeating-linear-gradient(115deg, var(--glow-soft) 0 2px, transparent 2px 14px),
@@ -215,13 +215,18 @@
       repeating-linear-gradient(90deg, var(--glow-soft) 0 1px, transparent 1px 10px),
       var(--bg-elevated);
   }
-  .project-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;}
-  .project h3{font-size:1.15rem; letter-spacing:-0.01em;}
-  .project-cat{font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-bright); background:var(--glow-soft); padding:4px 10px; border-radius:999px; white-space:nowrap;}
-  .project p.desc{color:var(--text-muted); margin:0; font-size:14.5px;}
+  .project-visual[data-pattern="game"]{
+    background:
+      radial-gradient(var(--glow-soft) 1.4px, transparent 1.4px) 0 0/10px 10px,
+      var(--bg-elevated);
+  }
+  .project-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+  .project h3{font-size:1.05rem; letter-spacing:-0.01em;}
+  .project-cat{font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-bright); background:var(--glow-soft); padding:3px 9px; border-radius:999px; white-space:nowrap;}
+  .project p.desc{color:var(--text-muted); margin:0; font-size:13.5px;}
   .project .chips{margin-top:2px;}
-  .project .chip{font-size:12px; padding:5px 11px; background:var(--surface-strong);}
-  .project-links{display:flex; gap:18px; flex-wrap:wrap; margin-top:2px;}
+  .project .chip{font-size:11.5px; padding:4px 10px; background:var(--surface-strong);}
+  .project-links{display:flex; gap:16px; flex-wrap:wrap; margin-top:2px;}
   .project-link{
     display:inline-flex; align-items:center; gap:6px;
     font-family:'IBM Plex Mono', monospace; font-size:13px; text-decoration:none; color:var(--text);
@@ -493,13 +498,30 @@
       links: [
         {label:{tr:"Koda bak", en:"View code"}, href:"https://github.com/mehmet-yuksell/dogum-cantasi"}
       ]
+    },
+    {
+      title: "Yerli Yerinde",
+      titleEn: "Yerli Yerinde (Everything in Its Place)",
+      category: {tr:"Oyun", en:"Game"},
+      pattern: "game",
+      icon: 'grid',
+      desc: {
+        tr:"Phaser ile yazılmış, odadaki eşyaları doğru yerine sıralayıp düzenlediğin bir bulmaca oyunu. Seviyeler prosedürel olarak üretiliyor ve bir çözücü ile her seviyenin çözülebilir olduğu garanti ediliyor; günlük bulmaca modu, geri al (undo) desteği ve Capacitor ile paketlenmiş bir Android sürümü var.",
+        en:"A Phaser-based puzzle game where you sort and organize items in a room into their correct places. Levels are procedurally generated and verified solvable by a built-in solver; it includes a daily puzzle mode, undo support, and an Android build packaged with Capacitor."
+      },
+      stack: ["TypeScript","Phaser","Vite","Capacitor"],
+      links: [
+        {label:{tr:"Canlı oyna", en:"Play live"}, href:"https://cozysort.vercel.app"},
+        {label:{tr:"Koda bak", en:"View code"}, href:"https://github.com/mehmet-yuksell/ilk_oyun"}
+      ]
     }
   ];
 
   var ICONS = {
     shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v5c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>',
     pulse:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2-5 3 10 2-6h7"/></svg>',
-    chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg>'
+    chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg>',
+    grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>'
   };
 
   var svgExtIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg>';
