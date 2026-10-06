@@ -208,6 +208,7 @@
     color:var(--accent-bright); background:var(--bg-elevated);
   }
   .project-visual svg{width:18px; height:18px; opacity:.85;}
+  .project-visual img.visual-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;}
   .project-visual[data-pattern="security"]{
     background:
       repeating-linear-gradient(115deg, var(--glow-soft) 0 2px, transparent 2px 14px),
@@ -447,6 +448,10 @@
     if (metaDesc){
       metaDesc.setAttribute('content', metaDesc.getAttribute(l === 'en' ? 'data-en' : 'data-tr'));
     }
+    document.querySelectorAll('img[data-alt-tr]').forEach(function(img){
+      var val = img.getAttribute(l === 'en' ? 'data-alt-en' : 'data-alt-tr');
+      if (val !== null) img.setAttribute('alt', val);
+    });
     document.documentElement.setAttribute('lang', l === 'en' ? 'en' : 'tr');
     document.getElementById('langTr').classList.toggle('is-active', l === 'tr');
     document.getElementById('langEn').classList.toggle('is-active', l === 'en');
@@ -473,6 +478,10 @@
         tr:"Veri eksik olduğunda 'güvenli' varsaymak yerine 'bilinmiyor' diyen skor mantığını ben tasarladım.",
         en:"I designed the scoring logic to say 'unavailable' instead of assuming 'safe' when data is missing."
       },
+      image: {
+        src: "images/sentinelscope.webp",
+        alt: {tr:"SentinelScope arayüzünün ekran görüntüsü", en:"Screenshot of the SentinelScope interface"}
+      },
       stack: ["Next.js 16","TypeScript","Tailwind","Node.js","Docker"],
       links: [
         {label:{tr:"Canlı demo", en:"Live demo"}, href:"https://sentinelscope-nu.vercel.app/"},
@@ -492,6 +501,10 @@
       learned: {
         tr:"Göstergeleri hazır bir kütüphane kullanmadan, sıfırdan kendim yazdım.",
         en:"I wrote the indicators myself from scratch instead of relying on a ready-made library."
+      },
+      image: {
+        src: "images/bist30.webp",
+        alt: {tr:"Bist30 panelinin ekran görüntüsü", en:"Screenshot of the Bist30 dashboard"}
       },
       stack: ["Python","Streamlit","pandas","numpy","pytest"],
       links: [
@@ -513,6 +526,10 @@
         tr:"Modülü, büyük sisteme bağımlı kalmadan tek başına çalışabilecek şekilde tasarladım.",
         en:"I designed the module to run on its own, without depending on the larger system."
       },
+      image: {
+        src: "images/mombykind.webp",
+        alt: {tr:"Mombykind Aşı Ajandası uygulamasının ekran görüntüsü", en:"Screenshot of the Mombykind Vaccine Agenda app"}
+      },
       stack: ["NestJS","PostgreSQL","Flutter","Docker","Swagger"],
       links: [
         {label:{tr:"Koda bak", en:"View code"}, href:"https://github.com/mehmet-yuksell/mombykind-vaccine-tracker"}
@@ -532,6 +549,10 @@
         tr:"Hiçbir veriyi sunucuya göndermeden, tamamen cihaz üzerinde çalışmasını tercih ettim.",
         en:"I chose to keep everything fully on-device, without sending any data to a server."
       },
+      image: {
+        src: "images/dogum-cantasi.webp",
+        alt: {tr:"Doğum Çantası uygulamasının ekran görüntüsü", en:"Screenshot of the Hospital Bag Tracker app"}
+      },
       stack: ["Flutter","Dart","SQLite",{tr:"Yerel Bildirimler", en:"Local Notifications"}],
       links: [
         {label:{tr:"Koda bak", en:"View code"}, href:"https://github.com/mehmet-yuksell/dogum-cantasi"}
@@ -550,6 +571,10 @@
       learned: {
         tr:"Oyuncuyu çözümsüz bir seviyede bırakmamak için her seviyeyi bir çözücüyle doğruladım.",
         en:"I verify every level with a solver so players never get stuck on an unsolvable one."
+      },
+      image: {
+        src: "images/yerli-yerinde.webp",
+        alt: {tr:"Yerli Yerinde oyununun ekran görüntüsü", en:"Screenshot of the Yerli Yerinde game"}
       },
       stack: ["TypeScript","Phaser","Vite","Capacitor"],
       links: [
@@ -584,10 +609,11 @@
         return '<a class="project-link" href="'+esc(l.href)+'" target="_blank" rel="noopener">'+
           '<span data-tr="'+esc(l.label.tr)+'" data-en="'+esc(l.label.en)+'">'+esc(l.label.tr)+'</span>'+svgExtIcon+'</a>';
       }).join('');
+      var imgHTML = '<img class="visual-img" src="'+esc(p.image.src)+'" alt="'+esc(p.image.alt.tr)+'" data-alt-tr="'+esc(p.image.alt.tr)+'" data-alt-en="'+esc(p.image.alt.en)+'" loading="lazy" decoding="async" width="800" height="450" onerror="this.remove()">';
       return (
         '<div class="project" data-reveal>' +
           '<div class="project-top">' +
-            '<div class="project-visual" data-pattern="'+p.pattern+'">'+ICONS[p.icon]+'</div>' +
+            '<div class="project-visual" data-pattern="'+p.pattern+'">'+ICONS[p.icon]+imgHTML+'</div>' +
             '<span class="project-num">'+num+'</span>' +
           '</div>' +
           '<div class="project-head">' +
