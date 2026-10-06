@@ -3,11 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mehmet Yüksel</title>
-<meta name="description" content="Mehmet Yüksel — Yönetim Bilişim Sistemleri öğrencisi; veri bilimi ve yapay zekaya ilgi duyan, gerçek projeler üreten bir geliştirici.">
+<title data-tr="Mehmet Yüksel" data-en="Mehmet Yüksel — Portfolio">Mehmet Yüksel</title>
+<meta name="description" id="metaDescription" data-tr="Mehmet Yüksel — Yönetim Bilişim Sistemleri öğrencisi; veri bilimi ve yapay zekaya ilgi duyan, gerçek projeler üreten bir geliştirici." data-en="Mehmet Yüksel — Management Information Systems student interested in data science and AI, building real projects." content="Mehmet Yüksel — Yönetim Bilişim Sistemleri öğrencisi; veri bilimi ve yapay zekaya ilgi duyan, gerçek projeler üreten bir geliştirici.">
 <meta property="og:title" content="Mehmet Yüksel">
 <meta property="og:description" content="Veri bilimine ilgi duyan bir YBS öğrencisinin portföyü: projeler, beceriler, iletişim.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://mehmetyuksel-portfolio.vercel.app/">
+<meta property="og:image" content="/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mehmet Yüksel">
+<meta name="twitter:description" content="Veri bilimine ilgi duyan bir YBS öğrencisinin portföyü: projeler, beceriler, iletişim.">
+<meta name="twitter:image" content="/og-image.png">
 <meta name="theme-color" content="#05070f">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305070f'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%238fbbe0'/%3E%3C/svg%3E">
 <style>
@@ -21,6 +27,10 @@
     --glow:rgba(0,180,255,.55); --glow-soft:rgba(0,180,255,.16);
   }
   *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
   html,body{margin:0;}
   em, i, cite, address{font-style:normal;}
   body{
@@ -149,7 +159,7 @@
   .btn-ghost{border-color:var(--border); color:var(--text); background:var(--surface);}
   .btn-ghost:hover, .btn-ghost:focus-visible{border-color:var(--border-strong); color:var(--accent-bright); box-shadow:0 0 22px var(--glow-soft);}
 
-  section{padding-block:72px; border-top:1px solid var(--border);}
+  section{padding-block:72px; border-top:1px solid var(--border); scroll-margin-top:76px;}
   .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:36px; flex-wrap:wrap;}
   .section-num{font-family:'IBM Plex Mono', monospace; color:var(--accent-bright); font-size:13px;}
   .section-head h2{font-size:clamp(1.6rem, 3vw, 2.1rem);}
@@ -180,7 +190,7 @@
     display:flex; flex-direction:column; gap:8px;
     padding:16px; background:var(--surface); border:1px solid var(--border); border-radius:14px;
     backdrop-filter:blur(8px); position:relative; overflow:hidden;
-    transition:border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+    transition:opacity .6s ease, border-color .2s ease, box-shadow .2s ease, transform .15s ease;
     transform-style:preserve-3d;
   }
   .project::after{
@@ -387,6 +397,12 @@
         <h2 data-tr="Projeler" data-en="Projects">Projeler</h2>
       </div>
       <div class="projects-list" id="projectsList"></div>
+      <noscript>
+        <p class="mono" style="color:var(--text-muted);">
+          JavaScript devre dışı — proje kartları burada görünmüyor. Projelerin tam listesine GitHub profilimden ulaşabilirsin: <a href="https://github.com/mehmet-yuksell" target="_blank" rel="noopener">github.com/mehmet-yuksell</a><br>
+          JavaScript is disabled — project cards aren't shown here. See the full list on GitHub: <a href="https://github.com/mehmet-yuksell" target="_blank" rel="noopener">github.com/mehmet-yuksell</a>
+        </p>
+      </noscript>
     </div>
   </section>
 
@@ -420,10 +436,14 @@
   try{ var saved = localStorage.getItem('my-lang'); if(saved === 'en') currentLang = 'en'; }catch(e){}
 
   function applyLang(l){
-    document.querySelectorAll('[data-tr]').forEach(function(el){
+    document.querySelectorAll('[data-tr]:not(meta)').forEach(function(el){
       var val = el.getAttribute(l === 'en' ? 'data-en' : 'data-tr');
       if(val !== null) el.textContent = val;
     });
+    var metaDesc = document.getElementById('metaDescription');
+    if (metaDesc){
+      metaDesc.setAttribute('content', metaDesc.getAttribute(l === 'en' ? 'data-en' : 'data-tr'));
+    }
     document.documentElement.setAttribute('lang', l === 'en' ? 'en' : 'tr');
     document.getElementById('langTr').classList.toggle('is-active', l === 'tr');
     document.getElementById('langEn').classList.toggle('is-active', l === 'en');
@@ -573,6 +593,9 @@
           el.style.transitionDelay = Math.min(idx, 5) * 80 + 'ms';
           counters.set(parent, idx + 1);
           el.classList.add('is-visible');
+          el.addEventListener('transitionend', function(){
+            el.style.transitionDelay = '';
+          }, {once:true});
           observer.unobserve(el);
         }
       });
@@ -671,24 +694,27 @@
     var canvas = document.getElementById('pipeline');
     var ctx = canvas.getContext('2d');
     var W, H, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var lowPower = window.innerWidth < 720 || (navigator.hardwareConcurrency ? navigator.hardwareConcurrency <= 4 : false);
     var nodes = [];
-    var N = 52;
+    var N = lowPower ? 25 : 52;
+    var shadowScale = lowPower ? 0.5 : 1;
     var t = 0;
     var pointer = {x:null, y:null};
     var running = false;
     var rafId = null;
 
-    function colorRGB(varName){
+    function colorChannels(varName){
       var v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
       var el = document.createElement('div');
       el.style.color = v;
       document.body.appendChild(el);
-      var rgb = getComputedStyle(el).color;
+      var computed = getComputedStyle(el).color;
       document.body.removeChild(el);
-      return rgb;
+      var nums = computed.match(/[\d.]+/g) || ['255','255','255'];
+      return nums.slice(0,3).join(',');
     }
-    var lineRgb = colorRGB('--border-strong');
-    var dotRgb = colorRGB('--accent-bright');
+    var lineChannels = colorChannels('--border-strong');
+    var dotChannels = colorChannels('--accent-bright');
 
     function resize(){
       var newW = window.innerWidth * dpr, newH = window.innerHeight * dpr;
@@ -750,7 +776,7 @@
           var dist = Math.sqrt(dx*dx+dy*dy);
           if(dist<maxDist){
             var op = (1-dist/maxDist)*0.45;
-            ctx.strokeStyle = lineRgb.replace('rgb','rgba').replace(')', ','+op+')');
+            ctx.strokeStyle = 'rgba(' + lineChannels + ',' + op + ')';
             ctx.lineWidth = 1*dpr;
             ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
           }
@@ -760,7 +786,7 @@
           var dp2 = Math.sqrt(dxp2*dxp2 + dyp2*dyp2);
           if(dp2 < 190*dpr){
             var op2 = (1-dp2/(190*dpr))*0.55;
-            ctx.strokeStyle = dotRgb.replace('rgb','rgba').replace(')', ','+op2+')');
+            ctx.strokeStyle = 'rgba(' + dotChannels + ',' + op2 + ')';
             ctx.lineWidth = 1*dpr;
             ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(pointer.x,pointer.y); ctx.stroke();
           }
@@ -768,9 +794,9 @@
       }
       for(var k=0;k<nodes.length;k++){
         var pulse = reduceMotion ? 1.8 : 1.6 + Math.sin(t*0.04 + k)*0.7;
-        ctx.shadowColor = dotRgb;
-        ctx.shadowBlur = (8 + pulse*2)*dpr;
-        ctx.fillStyle = dotRgb.replace('rgb','rgba').replace(')', ',0.95)');
+        ctx.shadowColor = 'rgba(' + dotChannels + ',0.95)';
+        ctx.shadowBlur = (8 + pulse*2)*dpr*shadowScale;
+        ctx.fillStyle = 'rgba(' + dotChannels + ',0.95)';
         ctx.beginPath(); ctx.arc(nodes[k].x, nodes[k].y, pulse*dpr, 0, Math.PI*2); ctx.fill();
       }
       ctx.shadowBlur = 0;
