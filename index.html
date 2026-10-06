@@ -444,8 +444,8 @@
       pattern: "security",
       icon: 'shield',
       desc: {
-        tr:"Bir web sitesinin veya IP adresinin güvenlik durumunu DNS, TLS, HTTP başlıkları, IP/alan adı ve tehdit istihbaratı verilerini toplayarak tek bir risk skoruna çeviren platform. Veri eksikse 'güvenli' varsaymak yerine açıkça 'bilinmiyor' diyor; SSRF korumalı gerçek ağ sorguları üzerine kurulu.",
-        en:"A platform that turns a website or IP's security posture into a single risk score by gathering DNS, TLS, HTTP header, IP/domain and threat-intel data. When data is missing it says 'unavailable' instead of assuming 'safe' — built on real, SSRF-protected network lookups."
+        tr:"Site/IP güvenliğini tek bir risk skoruna çeviren araç; veri eksikse 'bilinmiyor' der, asla 'güvenli' varsaymaz.",
+        en:"Turns a site/IP's security signals into one risk score — says 'unavailable' rather than assuming 'safe' when data's missing."
       },
       stack: ["Next.js 16","TypeScript","Tailwind","Node.js","Docker"],
       links: [
@@ -460,8 +460,8 @@
       pattern: "data",
       icon: 'chart',
       desc: {
-        tr:"Borsa İstanbul hisseleri için Streamlit ile yazılmış teknik analiz paneli. SMA, EMA, RSI ve MACD'i sıfırdan (pandas/numpy ile) hesaplıyor; ~790 hissede arama, TL/USD kur dönüşümü ve ileriye bakış hatası içermeyen bir 'Sinyal Karnesi' backtest motoru barındırıyor.",
-        en:"A Streamlit technical-analysis dashboard for Turkey's BIST stocks. SMA, EMA, RSI and MACD are computed from scratch with pandas/numpy; it searches across ~790 listed companies, converts prices between TRY/USD, and ships a look-ahead-free 'Signal Scorecard' backtest engine."
+        tr:"BIST hisseleri için sıfırdan yazılmış göstergeler ve ileriye bakış hatasız backtest içeren Streamlit paneli.",
+        en:"A Streamlit dashboard for BIST stocks with indicators built from scratch and a look-ahead-free backtest engine."
       },
       stack: ["Python","Streamlit","pandas","numpy","pytest"],
       links: [
@@ -476,8 +476,8 @@
       pattern: "health",
       icon: 'pulse',
       desc: {
-        tr:"Ebeveynlerin çocuk aşı takvimini takip edebildiği, LOINC/SNOMED-CT standartlarıyla uyumlu, rol tabanlı yetkilendirmeye sahip bağımsız bir modül. NestJS + PostgreSQL backend'i, Flutter uygulamasıyla yerel bildirimler üzerinden konuşuyor.",
-        en:"A standalone module for parents to track their child's vaccination schedule, compliant with LOINC/SNOMED-CT standards and with role-based authorization. A NestJS + PostgreSQL backend talks to a Flutter app through local notifications."
+        tr:"Çocuk aşı takvimini LOINC/SNOMED-CT standartlarıyla takip eden, rol tabanlı bağımsız bir modül.",
+        en:"A standalone, role-based module for tracking child vaccinations, compliant with LOINC/SNOMED-CT standards."
       },
       stack: ["NestJS","PostgreSQL","Flutter","Docker","Swagger"],
       links: [
@@ -491,8 +491,8 @@
       pattern: "health",
       icon: 'pulse',
       desc: {
-        tr:"Gebeliğin son haftalarında hastane çantasını hazırlamak için sunucusuz, tamamen cihaz üzerinde çalışan bir Flutter modülü. Hazır madde listesi, gebelik haftasına göre yerel bildirim hatırlatıcısı ve eksik maddeleri paylaşma özelliği içeriyor.",
-        en:"A serverless, fully on-device Flutter module for packing the hospital bag in the final weeks of pregnancy. It ships a default item checklist, local notification reminders tied to pregnancy week, and a way to share what's still missing."
+        tr:"Hastane çantası hazırlığını yöneten, tamamen cihaz üzerinde çalışan sunucusuz bir Flutter modülü.",
+        en:"A serverless, fully on-device Flutter module for planning the hospital bag."
       },
       stack: ["Flutter","Dart","SQLite",{tr:"Yerel Bildirimler", en:"Local Notifications"}],
       links: [
@@ -501,13 +501,13 @@
     },
     {
       title: "Yerli Yerinde",
-      titleEn: "Yerli Yerinde (Everything in Its Place)",
+      titleEn: "Everything in Its Place",
       category: {tr:"Oyun", en:"Game"},
       pattern: "game",
       icon: 'grid',
       desc: {
-        tr:"Phaser ile yazılmış, odadaki eşyaları doğru yerine sıralayıp düzenlediğin bir bulmaca oyunu. Seviyeler prosedürel olarak üretiliyor ve bir çözücü ile her seviyenin çözülebilir olduğu garanti ediliyor; günlük bulmaca modu, geri al (undo) desteği ve Capacitor ile paketlenmiş bir Android sürümü var.",
-        en:"A Phaser-based puzzle game where you sort and organize items in a room into their correct places. Levels are procedurally generated and verified solvable by a built-in solver; it includes a daily puzzle mode, undo support, and an Android build packaged with Capacitor."
+        tr:"Odadaki eşyaları sıralayıp düzenlediğin, çözülebilirliği garantili prosedürel seviyelere sahip Phaser bulmacası.",
+        en:"A Phaser puzzle game where you sort room items, with procedurally generated, solver-verified levels."
       },
       stack: ["TypeScript","Phaser","Vite","Capacitor"],
       links: [
