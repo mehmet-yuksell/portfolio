@@ -24,7 +24,7 @@
     --border:rgba(168,199,255,.16); --border-strong:rgba(0,217,255,.5);
     --text:#f1f5ff; --text-muted:#9fb0d6;
     --accent:#2f8fff; --accent-bright:#00d9ff;
-    --glow:rgba(0,180,255,.55); --glow-soft:rgba(0,180,255,.16);
+    --glow:rgba(0,180,255,.35); --glow-soft:rgba(0,180,255,.1);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -62,23 +62,16 @@
   .aurora span{
     position:absolute; border-radius:50%; filter:blur(70px);
     background:radial-gradient(circle, var(--glow) 0%, transparent 70%);
-    opacity:.5; will-change:transform;
+    opacity:.3; will-change:transform;
   }
   .aurora span:nth-child(1){width:620px; height:620px; top:-220px; left:-160px; animation:drift1 22s ease-in-out infinite alternate;}
   .aurora span:nth-child(2){width:520px; height:520px; top:30%; right:-200px; animation:drift2 26s ease-in-out infinite alternate;}
-  .aurora span:nth-child(3){width:560px; height:560px; bottom:-260px; left:20%; animation:drift3 30s ease-in-out infinite alternate; opacity:.36;}
+  .aurora span:nth-child(3){width:560px; height:560px; bottom:-260px; left:20%; animation:drift3 30s ease-in-out infinite alternate; opacity:.2;}
   @keyframes drift1{ from{transform:translate(0,0) scale(1);} to{transform:translate(60px,80px) scale(1.15);} }
   @keyframes drift2{ from{transform:translate(0,0) scale(1);} to{transform:translate(-70px,50px) scale(0.9);} }
   @keyframes drift3{ from{transform:translate(0,0) scale(1);} to{transform:translate(40px,-60px) scale(1.1);} }
-  .spotlight{
-    position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:0;
-    background:radial-gradient(280px 280px at var(--sx,50%) var(--sy,50%), var(--glow-soft), transparent 70%);
-    transition:opacity .4s ease;
-  }
-  .spotlight.is-active{opacity:1;}
   @media (prefers-reduced-motion: reduce){
     .aurora span{animation:none !important;}
-    .spotlight{display:none !important;}
   }
 
   [data-reveal]{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
@@ -130,7 +123,7 @@
   .hamburger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
 
   .hero{position:relative; padding-block:96px 80px;}
-  #pipeline{position:fixed; inset:0; width:100vw; height:100vh; z-index:-2; opacity:.55; pointer-events:none;}
+  #pipeline{position:fixed; inset:0; width:100vw; height:100vh; z-index:-2; opacity:.3; pointer-events:none;}
   .hero-inner{position:relative; z-index:1;}
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:.09em;
@@ -190,8 +183,7 @@
     display:flex; flex-direction:column; gap:8px;
     padding:16px; background:var(--surface); border:1px solid var(--border); border-radius:14px;
     backdrop-filter:blur(8px); position:relative; overflow:hidden;
-    transition:opacity .6s ease, border-color .2s ease, box-shadow .2s ease, transform .15s ease;
-    transform-style:preserve-3d;
+    transition:opacity .6s ease, border-color .2s ease, box-shadow .2s ease, transform .6s ease;
   }
   .project::after{
     content:""; position:absolute; inset:0; pointer-events:none; opacity:0;
@@ -286,7 +278,6 @@
 <div class="grain" aria-hidden="true"></div>
 <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
 <canvas id="pipeline" aria-hidden="true"></canvas>
-<div class="spotlight" id="spotlight" aria-hidden="true"></div>
 
 <nav class="nav" id="siteNav">
   <div class="wrap nav-row">
@@ -434,7 +425,6 @@
 (function(){
   "use strict";
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var pointerFine = window.matchMedia('(pointer: fine)').matches;
 
   var currentLang = 'tr';
   try{ var saved = localStorage.getItem('my-lang'); if(saved === 'en') currentLang = 'en'; }catch(e){}
@@ -696,17 +686,6 @@
     });
   }
 
-  function initSpotlight(){
-    if (reduceMotion || !pointerFine) return;
-    var el = document.getElementById('spotlight');
-    window.addEventListener('pointermove', function(e){
-      el.style.setProperty('--sx', e.clientX + 'px');
-      el.style.setProperty('--sy', e.clientY + 'px');
-      el.classList.add('is-active');
-    });
-    document.addEventListener('mouseleave', function(){ el.classList.remove('is-active'); });
-  }
-
   function initParallax(){
     if (reduceMotion) return;
     var el = document.querySelector('.aurora');
@@ -719,25 +698,6 @@
         ticking = false;
       });
     }, {passive:true});
-  }
-
-  function initCardTilt(){
-    if (reduceMotion || !pointerFine) return;
-    document.querySelectorAll('.project').forEach(function(card){
-      card.addEventListener('pointermove', function(e){
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width;
-        var py = (e.clientY - r.top) / r.height;
-        card.style.setProperty('--mx', (px*100) + '%');
-        card.style.setProperty('--my', (py*100) + '%');
-        var rx = (py - 0.5) * -6;
-        var ry = (px - 0.5) * 6;
-        card.style.transform = 'perspective(700px) rotateX('+rx+'deg) rotateY('+ry+'deg)';
-      });
-      card.addEventListener('pointerleave', function(){
-        card.style.transform = '';
-      });
-    });
   }
 
   function initCanvas(){
@@ -879,9 +839,7 @@
   initReveals();
   initNavActive();
   initMobileMenu();
-  initSpotlight();
   initParallax();
-  initCardTilt();
   initCanvas();
 })();
 </script>
