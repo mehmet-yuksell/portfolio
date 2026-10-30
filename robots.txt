@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://mehmetyuksel.online/sitemap.xml
