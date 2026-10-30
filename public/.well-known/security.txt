@@ -1,0 +1,5 @@
+Contact: mailto:mehmetyuksell475@gmail.com
+Expires: 2027-10-30T00:00:00.000Z
+Preferred-Languages: en, tr
+Canonical: https://mehmetyuksel.online/.well-known/security.txt
+Policy: https://github.com/mehmet-yuksell/portfolio/blob/main/SECURITY.md
