@@ -46,26 +46,26 @@ export const projects: Project[] = [
   },
   {
     slug: "bist30",
-    title: { en: "BIST 30 Technical Analysis", tr: "BIST 30 Teknik Analiz Paneli" },
+    title: { en: "BIST 100 Technical Analysis", tr: "BIST 100 Teknik Analiz Paneli" },
     category: { en: "Data", tr: "Veri" },
     description: {
-      en: "A Streamlit dashboard for BIST 30 stocks with indicators written from scratch and a look-ahead-free backtesting engine.",
-      tr: "BIST 30 hisseleri için sıfırdan yazılmış göstergeler ve ileriye bakış hatası olmayan bir backtest motoru içeren Streamlit paneli.",
+      en: "A Streamlit research and risk-tracking dashboard for BIST 100: two signal systems, sell warnings, a watchlist and a daily signal log, each measured with a look-ahead-free test on held-out data.",
+      tr: "BIST 100 için Streamlit ile yazılmış araştırma ve risk takip paneli: iki sinyal sistemi, satış uyarıları, takip listesi ve günlük sinyal kaydı; hepsi ileriye bakış hatası olmayan, ayrı tutulmuş verideki testle ölçülür.",
     },
     highlight: {
-      en: "Every indicator is implemented by hand — no TA library.",
-      tr: "Tüm göstergeler hazır kütüphane olmadan elle yazıldı.",
+      en: "Reports negative results too: on the 2025+ test set neither buy system beat random entries.",
+      tr: "Olumsuz sonucu da gösterir: 2025 sonrası testte iki alım sistemi de rastgele girişi geçemedi.",
     },
     image: {
       src: "/images/bist30.webp",
       alt: {
-        en: "BIST 30 technical analysis dashboard with price chart and indicators",
-        tr: "Fiyat grafiği ve göstergelerle BIST 30 teknik analiz paneli",
+        en: "BIST 100 screener showing today's buy signals, a test-result warning and recent signals",
+        tr: "Bugünün alım sinyalleri, test sonucu uyarısı ve son sinyallerle BIST 100 tarama ekranı",
       },
       width: 800,
       height: 450,
     },
-    tags: ["Python", "Streamlit", "pandas", "NumPy", "pytest"],
+    tags: ["Python", "Streamlit", "pandas", "NumPy", "pytest", "GitHub Actions"],
     links: [
       { kind: "live", href: "https://bist30-opsputfhf9b9i6kkjnyefc.streamlit.app/" },
       { kind: "github", href: "https://github.com/mehmet-yuksell/Bist30" },
