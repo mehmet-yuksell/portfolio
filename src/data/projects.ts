@@ -40,7 +40,7 @@ export const projects: Project[] = [
     },
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "Docker"],
     links: [
-      { kind: "live", href: "https://sentinelscope-nu.vercel.app/" },
+      { kind: "live", href: "https://sentinelscope.mehmetyuksel.online/" },
       { kind: "github", href: "https://github.com/mehmet-yuksell/sentinelscope-security" },
     ],
   },
@@ -120,7 +120,7 @@ export const projects: Project[] = [
     },
     tags: ["TypeScript", "Phaser", "Vite", "Capacitor"],
     links: [
-      { kind: "live", href: "https://cozysort.vercel.app/" },
+      { kind: "live", href: "https://cozysort.mehmetyuksel.online/" },
       { kind: "github", href: "https://github.com/mehmet-yuksell/ilk_oyun" },
     ],
   },
