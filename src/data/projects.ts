@@ -49,23 +49,23 @@ export const projects: Project[] = [
     title: { en: "BIST 100 Technical Analysis", tr: "BIST 100 Teknik Analiz Paneli" },
     category: { en: "Data", tr: "Veri" },
     description: {
-      en: "A Streamlit research and risk-tracking dashboard for BIST 100: two signal systems, sell warnings, a watchlist and a daily signal log, each measured with a look-ahead-free test on held-out data.",
-      tr: "BIST 100 için Streamlit ile yazılmış araştırma ve risk takip paneli: iki sinyal sistemi, satış uyarıları, takip listesi ve günlük sinyal kaydı; hepsi ileriye bakış hatası olmayan, ayrı tutulmuş verideki testle ölçülür.",
+      en: "A Streamlit dashboard for BIST 100 that shows buy and sell signals from two TradingView indicators on daily and weekly bars, with a watchlist, stock details and comparison.",
+      tr: "BIST 100 için Streamlit paneli: iki TradingView göstergesinin alım ve satış sinyallerini günlük ve haftalık mumlarla gösterir; takip listesi, hisse detayı ve karşılaştırma içerir.",
     },
     highlight: {
-      en: "Reports negative results too: on the 2025+ test set neither buy system beat random entries.",
-      tr: "Olumsuz sonucu da gösterir: 2025 sonrası testte iki alım sistemi de rastgele girişi geçemedi.",
+      en: "Both Pine Script indicators are ported line by line to Python, so signals match TradingView's rules.",
+      tr: "İki Pine Script göstergesi Python'a satır satır aktarıldı; sinyaller TradingView'deki kurallarla aynı.",
     },
     image: {
       src: "/images/bist30.webp",
       alt: {
-        en: "BIST 100 screener showing today's buy signals, a test-result warning and recent signals",
-        tr: "Bugünün alım sinyalleri, test sonucu uyarısı ve son sinyallerle BIST 100 tarama ekranı",
+        en: "TKFEN daily price chart with EMA 13 and EMA 34 lines and blue buy and take-profit markers",
+        tr: "EMA 13 ve EMA 34 çizgileri, mavi alım ve KAR AL işaretleriyle TKFEN günlük fiyat grafiği",
       },
       width: 800,
       height: 450,
     },
-    tags: ["Python", "Streamlit", "pandas", "NumPy", "pytest", "GitHub Actions"],
+    tags: ["Python", "Streamlit", "pandas", "Plotly", "Pine Script", "pytest"],
     links: [
       { kind: "live", href: "https://bist30-opsputfhf9b9i6kkjnyefc.streamlit.app/" },
       { kind: "github", href: "https://github.com/mehmet-yuksell/Bist30" },
